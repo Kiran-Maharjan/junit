@@ -1,6 +1,8 @@
 package com.kiran;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,5 +21,31 @@ class ContactManagerTest {
                 && contact.getPhoneNumber().equals("0123456789"))
                 .findAny()
                 .isPresent());
+    }
+
+    @Test
+    @DisplayName("Should not create contact when first name is null")
+    public void shouldThrowRunTimeExceptionWhenFirstNameIsNull(){
+
+        Assertions.assertThrows(RuntimeException.class,()->{
+            new ContactManager().addContacts(new Contact(null,"maharjan","0123456789"));
+        });
+    }
+
+    @Test
+    @DisplayName("Last name must not be null")
+    public void shouldThrowRunTimeExceptionWhenLastNameIsNull(){
+        Assertions.assertThrows(RuntimeException.class,()->{
+//        new RuntimeException();
+            new ContactManager().addContacts(new Contact("firstname",null,"132"));
+        });
+    }
+
+    @Test
+    @DisplayName("Phone number must not be null")
+    public void shouldThrowRunTimeExceptionWhenNumberIsNull(){
+        Assertions.assertThrows(RuntimeException.class,()->{
+            new ContactManager().addContact("firstname","lastname",null);
+        });
     }
 }

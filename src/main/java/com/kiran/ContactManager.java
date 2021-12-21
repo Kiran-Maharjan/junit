@@ -21,6 +21,7 @@ public class ContactManager {
     public Collection<Contact> getAllContacts(){
         return contactList.values();
     }
+
     public void addContacts(Contact contact){
         contactList.put(generateKey(contact),contact);
     }
